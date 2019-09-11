@@ -1,4 +1,4 @@
-# packer-xenial-redis-ec2
+# packer-xenial-consul-ec2
 An EC2 AMI based on ubuntu xenial with Consul
 
 # Purpose

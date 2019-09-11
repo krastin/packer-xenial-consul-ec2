@@ -1,7 +1,7 @@
 {
   "variables": {
     "name": "krastin/xenial-consul",
-    "build_name": "xeniak-redis",
+    "build_name": "xenial-consul",
     "build_cpu_cores": "2",
     "build_memory": "1024",
     "cpu_cores": "1",

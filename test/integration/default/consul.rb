@@ -1,6 +1,6 @@
 describe user('consul') do
     it { should exist }
-    its('groups') { should eq ['redis', 'sudo'] }
+    its('groups') { should eq ['consul', 'sudo'] }
     its('home') { should eq '/home/consul' }
 end
 
