@@ -26,7 +26,7 @@ apt-get -y install build-essential linux-headers-$(uname -r)
 DEBIAN_FRONTEND=noninteractive DEBIAN_PRIORITY=critical apt-get -q -y -o "Dpkg::Options::=--force-confdef" -o "Dpkg::Options::=--force-confold" upgrade
 
 # Install some tools
-apt-get -y install jq curl unzip vim tmux cloud-init
+apt-get -y install jq curl unzip vim tmux cloud-init language-pack-en
 
 apt-get autoremove -y
 apt-get clean
