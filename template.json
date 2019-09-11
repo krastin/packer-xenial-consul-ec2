@@ -1,0 +1,157 @@
+{
+  "variables": {
+    "name": "krastin/xenial-consul",
+    "build_name": "xeniak-redis",
+    "build_cpu_cores": "2",
+    "build_memory": "1024",
+    "cpu_cores": "1",
+    "memory": "512",
+    "disk_size": "40960",
+    "ssh_username": "ubuntu",
+    "ssh_password": "ubuntu"
+  },
+  "push": {
+    "name": "{{user `name`}}",
+    "exclude": [
+      ".git",
+      "packer_cache",
+      "output*-vbox",
+      "output*-vmware",
+      "*.box"
+    ]
+  },
+  "builders": [
+    {
+      "name": "us-east-1",
+      "profile": "hashi",
+      "type": "amazon-ebs",
+      "region": "us-east-1",
+      "source_ami_filter": {
+        "filters": {
+        "name": "ubuntu/images/hvm-ssd/ubuntu-xenial-16.04-amd64-server-*",
+        "root-device-type": "ebs"
+        },
+        "owners": ["099720109477"],
+        "most_recent": true
+      },
+      "instance_type": "t2.micro",
+      "ssh_username": "ubuntu",
+      "ami_name": "krastin-xenial-consul-{{timestamp}}",
+      "tags": {
+        "OS Version": "Ubuntu",
+        "Release": "Latest"
+      }
+    },
+    {
+      "name": "us-west-1",
+      "profile": "hashi",
+      "type": "amazon-ebs",
+      "region": "us-west-1",
+      "source_ami_filter": {
+        "filters": {
+        "name": "ubuntu/images/hvm-ssd/ubuntu-xenial-16.04-amd64-server-*",
+        "root-device-type": "ebs"
+        },
+        "owners": ["099720109477"],
+        "most_recent": true
+      },      "instance_type": "t2.micro",
+      "ssh_username": "ubuntu",
+      "ami_name": "krastin-xenial-consul-{{timestamp}}",
+      "tags": {
+        "OS Version": "Ubuntu",
+        "Release": "Latest"
+      }
+    },
+    {
+      "name": "ca-central-1",
+      "profile": "hashi",
+      "type": "amazon-ebs",
+      "region": "ca-central-1",
+      "source_ami_filter": {
+        "filters": {
+        "name": "ubuntu/images/hvm-ssd/ubuntu-xenial-16.04-amd64-server-*",
+        "root-device-type": "ebs"
+        },
+        "owners": ["099720109477"],
+        "most_recent": true
+      },      "instance_type": "t2.micro",
+      "ssh_username": "ubuntu",
+      "ami_name": "krastin-xenial-consul-{{timestamp}}",
+      "tags": {
+        "OS Version": "Ubuntu",
+        "Release": "Latest"
+      }
+    },
+    {
+      "name": "eu-central-1",
+      "profile": "hashi",
+      "type": "amazon-ebs",
+      "region": "eu-central-1",
+      "source_ami_filter": {
+        "filters": {
+        "name": "ubuntu/images/hvm-ssd/ubuntu-xenial-16.04-amd64-server-*",
+        "root-device-type": "ebs"
+        },
+        "owners": ["099720109477"],
+        "most_recent": true
+      },      "instance_type": "t2.micro",
+      "ssh_username": "ubuntu",
+      "ami_name": "krastin-xenial-consul-{{timestamp}}",
+      "tags": {
+        "OS Version": "Ubuntu",
+        "Release": "Latest"
+      }
+    },
+    {
+      "name": "eu-west-1",
+      "profile": "hashi",
+      "type": "amazon-ebs",
+      "region": "eu-west-1",
+      "source_ami_filter": {
+        "filters": {
+        "name": "ubuntu/images/hvm-ssd/ubuntu-xenial-16.04-amd64-server-*",
+        "root-device-type": "ebs"
+        },
+        "owners": ["099720109477"],
+        "most_recent": true
+      },      "instance_type": "t2.micro",
+      "ssh_username": "ubuntu",
+      "ami_name": "krastin-xenial-consul-{{timestamp}}",
+      "tags": {
+        "OS Version": "Ubuntu",
+        "Release": "Latest"
+      }
+    },
+    {
+      "name": "ap-northeast-1",
+      "profile": "hashi",
+      "type": "amazon-ebs",
+      "region": "ap-northeast-1",
+      "source_ami_filter": {
+        "filters": {
+        "name": "ubuntu/images/hvm-ssd/ubuntu-xenial-16.04-amd64-server-*",
+        "root-device-type": "ebs"
+        },
+        "owners": ["099720109477"],
+        "most_recent": true
+      },      "instance_type": "t2.micro",
+      "ssh_username": "ubuntu",
+      "ami_name": "krastin-xenial-consul-{{timestamp}}",
+      "tags": {
+        "OS Version": "Ubuntu",
+        "Release": "Latest"
+      }
+    }
+  ],
+  "provisioners": [
+    {
+      "script": "scripts/provision.sh",
+      "type": "shell"
+    },
+    {
+      "type": "file",
+      "source": "scripts/install_consul.sh",
+      "destination": "/home/consul/install_consul.sh"
+    }
+  ]
+}
