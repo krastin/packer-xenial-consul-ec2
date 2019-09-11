@@ -12,11 +12,11 @@ transport:
   username: ubuntu
 
 platforms:
-  - name: krastin-xenial-redis
+  - name: krastin-xenial-consul
     driver:
       image_search:
         owner-id: "729476260648" # my own owner-id
-        name: krastin-xenial-redis-*
+        name: krastin-xenial-consul-*
 
 verifier:
   name: inspec
