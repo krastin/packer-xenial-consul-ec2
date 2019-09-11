@@ -16,8 +16,10 @@ chmod 0440 /etc/sudoers.d/consul
 # Add flask to sudo group
 usermod -a -G sudo consul
 
-# Move consul installer
+# Set up consul installer
 mv /tmp/install_consul.sh /home/consul/
+chown consul:consul /home/consul/install_consul.sh
+chmod +x /home/consul/install_consul.sh
 
 # Install Linux headers and compiler toolchain
 apt-get -y install build-essential linux-headers-$(uname -r)
