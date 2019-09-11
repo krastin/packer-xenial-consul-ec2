@@ -145,13 +145,14 @@
   ],
   "provisioners": [
     {
-      "script": "scripts/provision.sh",
-      "type": "shell"
-    },
-    {
       "type": "file",
       "source": "scripts/install_consul.sh",
-      "destination": "/home/consul/install_consul.sh"
+      "destination": "/tmp/install_consul.sh"
+    },
+    {
+      "execute_command": "{{.Vars}} sudo -E bash '{{.Path}}'",
+      "script": "scripts/provision.sh",
+      "type": "shell"
     }
   ]
 }

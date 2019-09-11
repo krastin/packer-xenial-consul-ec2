@@ -8,13 +8,16 @@ apt-get -y install cloud-init
 apt-get update
 apt-get -y upgrade
 
-# Add no-password sudo config for vagrant user
-useradd consul
+# Add no-password sudo config for consul user
+useradd -m consul 
 echo "%consul ALL=NOPASSWD:ALL" > /etc/sudoers.d/consul
 chmod 0440 /etc/sudoers.d/consul
 
 # Add flask to sudo group
 usermod -a -G sudo consul
+
+# Move consul installer
+mv /tmp/install_consul.sh /home/consul/
 
 # Install Linux headers and compiler toolchain
 apt-get -y install build-essential linux-headers-$(uname -r)
