@@ -32,7 +32,7 @@ Description="HashiCorp Consul - A service mesh solution"
 Documentation=https://www.consul.io/
 Requires=network-online.target
 After=network-online.target
-ConditionFileNotEmpty=/etc/consul.d/consul.hcl
+ConditionFileNotEmpty=/etc/consul.d/basic_config.json
 
 [Service]
 User=consul
@@ -56,6 +56,6 @@ cat <<EOF > /etc/consul.d/basic_config.json
 {
   "data_dir": "/opt/consul",
   "log_level": "DEBUG",
-  "enable_debug": true,
+  "enable_debug": true
 }
 EOF
