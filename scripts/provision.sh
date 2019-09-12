@@ -18,8 +18,11 @@ usermod -a -G sudo consul
 
 # Set up consul installer
 mv /tmp/install_consul.sh /home/consul/
+mv /tmp/configure_consul.sh /home/consul/
 chown consul:consul /home/consul/install_consul.sh
+chown consul:consul /home/consul/configure_consul.sh
 chmod +x /home/consul/install_consul.sh
+chmod +x /home/consul/configure_consul.sh
 
 # Install Linux headers and compiler toolchain
 apt-get -y install build-essential linux-headers-$(uname -r)

@@ -21,6 +21,10 @@ which ${PRODUCT} || {
 sudo mkdir -p /etc/consul.d/
 sudo chown -R consul /etc/consul.d
 
+# Set up data directory
+sudo mkdir -p /opt/consul
+sudo chown -R consul /opt/consul
+
 # Set up systemd consul service
 cat <<EOF > consul.service
 [Unit]
@@ -44,3 +48,14 @@ WantedBy=multi-user.target
 EOF
 
 sudo mv consul.service /etc/systemd/system/consul.service
+
+# Set up basic consul settings
+echo '{ "node_name": "' `cat /etc/hostname` '"}' > /etc/consul.d/node_name.json
+
+cat <<EOF > /etc/consul.d/basic_config.json
+{
+  "data_dir": "/opt/consul",
+  "log_level": "DEBUG",
+  "enable_debug": true,
+}
+EOF

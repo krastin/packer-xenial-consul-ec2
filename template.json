@@ -150,6 +150,11 @@
       "destination": "/tmp/install_consul.sh"
     },
     {
+      "type": "file",
+      "source": "scripts/configure_consul.sh",
+      "destination": "/tmp/configure_consul.sh"
+    },    
+    {
       "execute_command": "{{.Vars}} sudo -E bash '{{.Path}}'",
       "script": "scripts/provision.sh",
       "type": "shell"
