@@ -1,31 +1,15 @@
 {
   "variables": {
-    "name": "krastin/xenial-consul",
-    "build_name": "xenial-consul",
-    "build_cpu_cores": "2",
-    "build_memory": "1024",
-    "cpu_cores": "1",
-    "memory": "512",
-    "disk_size": "40960",
     "ssh_username": "ubuntu",
-    "ssh_password": "ubuntu"
-  },
-  "push": {
-    "name": "{{user `name`}}",
-    "exclude": [
-      ".git",
-      "packer_cache",
-      "output*-vbox",
-      "output*-vmware",
-      "*.box"
-    ]
+    "ssh_password": "ubuntu",
+    "consul_version": "1.7.3"
   },
   "builders": [
     {
-      "name": "us-east-1",
-      "profile": "hashi",
+      "name": "eu-central-1",
+      "profile": "",
       "type": "amazon-ebs",
-      "region": "us-east-1",
+      "region": "eu-central-1",
       "source_ami_filter": {
         "filters": {
         "name": "ubuntu/images/hvm-ssd/ubuntu-xenial-16.04-amd64-server-*",
@@ -36,110 +20,13 @@
       },
       "instance_type": "t2.micro",
       "ssh_username": "ubuntu",
-      "ami_name": "krastin-xenial-consul-{{timestamp}}",
+      "ami_name": "krastin-xenial-consul-{{user `consul_version` | clean_resource_name}}-{{isotime \"20060102150405\"}}",
+      "ami_regions": ["us-east-1","us-west-1","ca-central-1","eu-west-1","ap-northeast-1"],
       "tags": {
         "OS Version": "Ubuntu",
-        "Release": "Latest"
-      }
-    },
-    {
-      "name": "us-west-1",
-      "profile": "hashi",
-      "type": "amazon-ebs",
-      "region": "us-west-1",
-      "source_ami_filter": {
-        "filters": {
-        "name": "ubuntu/images/hvm-ssd/ubuntu-xenial-16.04-amd64-server-*",
-        "root-device-type": "ebs"
-        },
-        "owners": ["099720109477"],
-        "most_recent": true
-      },      "instance_type": "t2.micro",
-      "ssh_username": "ubuntu",
-      "ami_name": "krastin-xenial-consul-{{timestamp}}",
-      "tags": {
-        "OS Version": "Ubuntu",
-        "Release": "Latest"
-      }
-    },
-    {
-      "name": "ca-central-1",
-      "profile": "hashi",
-      "type": "amazon-ebs",
-      "region": "ca-central-1",
-      "source_ami_filter": {
-        "filters": {
-        "name": "ubuntu/images/hvm-ssd/ubuntu-xenial-16.04-amd64-server-*",
-        "root-device-type": "ebs"
-        },
-        "owners": ["099720109477"],
-        "most_recent": true
-      },      "instance_type": "t2.micro",
-      "ssh_username": "ubuntu",
-      "ami_name": "krastin-xenial-consul-{{timestamp}}",
-      "tags": {
-        "OS Version": "Ubuntu",
-        "Release": "Latest"
-      }
-    },
-    {
-      "name": "eu-central-1",
-      "profile": "hashi",
-      "type": "amazon-ebs",
-      "region": "eu-central-1",
-      "source_ami_filter": {
-        "filters": {
-        "name": "ubuntu/images/hvm-ssd/ubuntu-xenial-16.04-amd64-server-*",
-        "root-device-type": "ebs"
-        },
-        "owners": ["099720109477"],
-        "most_recent": true
-      },      "instance_type": "t2.micro",
-      "ssh_username": "ubuntu",
-      "ami_name": "krastin-xenial-consul-{{timestamp}}",
-      "tags": {
-        "OS Version": "Ubuntu",
-        "Release": "Latest"
-      }
-    },
-    {
-      "name": "eu-west-1",
-      "profile": "hashi",
-      "type": "amazon-ebs",
-      "region": "eu-west-1",
-      "source_ami_filter": {
-        "filters": {
-        "name": "ubuntu/images/hvm-ssd/ubuntu-xenial-16.04-amd64-server-*",
-        "root-device-type": "ebs"
-        },
-        "owners": ["099720109477"],
-        "most_recent": true
-      },      "instance_type": "t2.micro",
-      "ssh_username": "ubuntu",
-      "ami_name": "krastin-xenial-consul-{{timestamp}}",
-      "tags": {
-        "OS Version": "Ubuntu",
-        "Release": "Latest"
-      }
-    },
-    {
-      "name": "ap-northeast-1",
-      "profile": "hashi",
-      "type": "amazon-ebs",
-      "region": "ap-northeast-1",
-      "source_ami_filter": {
-        "filters": {
-        "name": "ubuntu/images/hvm-ssd/ubuntu-xenial-16.04-amd64-server-*",
-        "root-device-type": "ebs"
-        },
-        "owners": ["099720109477"],
-        "most_recent": true
-      },      "instance_type": "t2.micro",
-      "ssh_username": "ubuntu",
-      "ami_name": "krastin-xenial-consul-{{timestamp}}",
-      "tags": {
-        "OS Version": "Ubuntu",
-        "Release": "Latest"
+        "Release": "Latest",
+	"Owner": "krastin@hashicorp.com",
+	"Purpose": "Consul {{user `consul_version`}} node"
       }
     }
   ],

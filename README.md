@@ -68,7 +68,10 @@ The parameters should make sense for people familiar with AWS.
 
 # How to build the AWS AMI
 
-    packer build template.json
+    ## build the default target of version 1.7.3
+    packer build template.json 
+    ## or build specific version of Consul
+    # packer build -var 'consul_version=1.7.0+ent' template.json 
 
 # How to test
     bundle exec kitchen test
