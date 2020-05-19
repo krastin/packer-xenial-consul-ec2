@@ -6,7 +6,6 @@ cat <<EOF >/etc/consul.d/retry_join.json
   "retry_join": $RETRYIPS
 }
 EOF
-echo "{ \"retry_join\": $RETRYIPS }" > /etc/consul.d/retry_join.json
 
 if [ "$SERVER" == "true" ]; then
     # setup server settings
