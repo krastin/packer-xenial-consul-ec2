@@ -1,13 +1,15 @@
 {
   "variables": {
+    "owner_name": "krastin",
+    "owner_email": "krastin@hashicorp.com",
     "ssh_username": "ubuntu",
     "ssh_password": "ubuntu",
-    "consul_version": "1.7.3"
+    "consul_version": "1.8.0"
   },
   "builders": [
     {
       "name": "eu-central-1",
-      "profile": "",
+      "profile": "hashi",
       "type": "amazon-ebs",
       "region": "eu-central-1",
       "source_ami_filter": {
@@ -20,12 +22,12 @@
       },
       "instance_type": "t2.micro",
       "ssh_username": "ubuntu",
-      "ami_name": "krastin-xenial-consul-{{user `consul_version` | clean_resource_name}}-{{isotime \"20060102150405\"}}",
+      "ami_name": "{{user `owner_name`}}-xenial-consul-{{user `consul_version` | clean_resource_name}}-{{isotime \"20060102150405\"}}",
       "ami_regions": ["us-east-1","us-west-1","ca-central-1","eu-west-1","ap-northeast-1"],
       "tags": {
         "OS Version": "Ubuntu",
         "Release": "Latest",
-	"Owner": "krastin@hashicorp.com",
+	"Owner": "{{user `owner_email`}}",
 	"Purpose": "Consul {{user `consul_version`}} node"
       }
     }
@@ -43,8 +45,9 @@
     },    
     {
       "execute_command": "{{.Vars}} sudo -E bash '{{.Path}}'",
-      "script": "scripts/provision.sh",
-      "type": "shell"
+      "scripts": ["scripts/provision.sh","scripts/install_consul.sh"],
+      "type": "shell",
+      "environment_vars": ["CONSUL_VERSION={{user `consul_version`}}"]
     }
   ]
 }
