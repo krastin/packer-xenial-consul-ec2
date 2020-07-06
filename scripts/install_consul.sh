@@ -50,8 +50,6 @@ EOF
 sudo mv consul.service /etc/systemd/system/consul.service
 
 # Set up basic consul settings
-echo '{ "node_name": "' `cat /etc/hostname` '"}' > /etc/consul.d/node_name.json
-
 cat <<EOF > /etc/consul.d/basic_config.json
 {
   "data_dir": "/opt/consul",
